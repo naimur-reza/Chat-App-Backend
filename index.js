@@ -3,9 +3,8 @@ const app = express();
 const cors = require("cors");
 const http = require("http");
 const port = 5000;
-app.use(cors());
-app.use(express.json());
 
+app.use(cors());
 const { Server } = require("socket.io");
 
 const server = http.createServer(app);
@@ -32,4 +31,8 @@ io.on("connection", (socket) => {
 
 server.listen(port, () => {
   console.log(`listening on *:${port}`);
+});
+
+app.get("/", (req, res) => {
+  res.send("server is running");
 });
