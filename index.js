@@ -45,6 +45,15 @@ io.on("connection", (socket) => {
   });
 });
 
+socket.on("disconnect", () => {
+  console.log(`User disconnected ${socket.id}`);
+
+  // Remove the disconnected user from the array
+  // connectedUsers = connectedUsers.filter((user) => user !== socket.id);
+  // io.emit("user_disconnected", connectedUsers);
+  connectedUsers.pop();
+});
+
 server.listen(port, () => {
   console.log(`listening on *:${port}`);
 });
