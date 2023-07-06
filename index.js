@@ -17,9 +17,10 @@ let connectedUsers = [];
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "chatwith-rect.netlify.app",
+    origin: "https://kothabol.netlify.app",
     methods: ["GET", "POST"],
     credentials: true,
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
   },
 });
 
