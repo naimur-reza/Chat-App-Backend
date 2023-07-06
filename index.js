@@ -1,18 +1,23 @@
 const express = require("express");
 const app = express();
+const { Server } = require("socket.io");
 const cors = require("cors");
 const http = require("http");
 const port = 5000;
 
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 
-const { Server } = require("socket.io");
+app.use(cors(corsOptions));
 
 let connectedUsers = [];
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "chatwith-rect.netlify.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
