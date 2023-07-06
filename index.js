@@ -43,15 +43,14 @@ io.on("connection", (socket) => {
     io.to(data.room).emit("receive_message", data);
     console.log(data);
   });
-});
+  socket.on("disconnect", () => {
+    console.log(`User disconnected ${socket.id}`);
 
-socket.on("disconnect", () => {
-  console.log(`User disconnected ${socket.id}`);
-
-  // Remove the disconnected user from the array
-  // connectedUsers = connectedUsers.filter((user) => user !== socket.id);
-  // io.emit("user_disconnected", connectedUsers);
-  connectedUsers.pop();
+    // Remove the disconnected user from the array
+    // connectedUsers = connectedUsers.filter((user) => user !== socket.id);
+    connectedUsers.pop();
+    io.emit("user_connected", connectedUsers);
+  });
 });
 
 server.listen(port, () => {
